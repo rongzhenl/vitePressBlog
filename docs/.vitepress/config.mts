@@ -45,12 +45,12 @@ export default defineConfig({
       },
     ],
 
-    // 侧边栏（所有分组默认折叠，点击标题可展开/收起）
+    // 侧边栏
     sidebar: {
       '/posts/': [
         {
           text: '📚 文章归档',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '所有文章', link: '/posts/' },
           ],

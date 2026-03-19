@@ -19,16 +19,15 @@ export interface PostMeta {
 
 export function usePostData() {
   const posts = computed<PostMeta[]>(() =>
-    ((postsData as PostMeta[]) ?? []).slice().sort((a, b) =>
+    (postsData as PostMeta[]).sort((a, b) =>
       new Date(b.date).getTime() - new Date(a.date).getTime()
     )
   )
 
   const tagMap = computed<Record<string, PostMeta[]>>(() => {
     const map: Record<string, PostMeta[]> = {}
-    for (const post of posts.value ?? []) {
+    for (const post of posts.value) {
       for (const tag of post.tags ?? []) {
-        if (!tag) continue
         if (!map[tag]) map[tag] = []
         map[tag].push(post)
       }
