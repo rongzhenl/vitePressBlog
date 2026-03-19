@@ -15,16 +15,17 @@ const { isDark, frontmatter } = useData()
 const route = useRoute()
 
 // ── 在此填入你的 Giscus 配置 ──────────────────────────────
+// repoId 已知，categoryId 需要在开启 Discussions 后从 giscus.app 获取
 const GISCUS_CONFIG = {
-  repo: 'your-username/blog',           // GitHub 仓库，格式：用户名/仓库名
-  repoId: 'YOUR_REPO_ID',               // 从 giscus.app 获取
-  category: 'Announcements',
-  categoryId: 'YOUR_CATEGORY_ID',       // 从 giscus.app 获取
+  repo: 'rongzhenl/vitePressBlog',
+  repoId: 'R_kgDORrZ1cw',              // ✅ 已配置
+  category: 'General',
+  categoryId: 'YOUR_CATEGORY_ID',       // ⚠️ 需要开启 Discussions 后填入
   mapping: 'pathname',
   strict: '0',
   reactionsEnabled: '1',
   emitMetadata: '0',
-  inputPosition: 'bottom',
+  inputPosition: 'top',                 // 评论框在上方，更方便
   lang: 'zh-CN',
 }
 // ─────────────────────────────────────────────────────────

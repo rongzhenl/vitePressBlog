@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { createRssFile } from './rss'
+import mathjax3 from 'markdown-it-mathjax3'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -20,6 +21,8 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/feed.xml' }],
     ['meta', { name: 'theme-color', content: '#3b82f6' }],
+    // MathJax 样式
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' }],
   ],
 
   // ── 主题配置 ──────────────────────────────────────────────
@@ -33,16 +36,38 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '文章', link: '/posts/' },
       { text: '标签', link: '/tags' },
-      { text: '关于', link: '/about' },
+      {
+        text: '更多',
+        items: [
+          { text: '关于', link: '/about' },
+          { text: 'RSS 订阅', link: '/feed.xml' },
+        ],
+      },
     ],
 
-    // 侧边栏（文章目录自动生成）
+    // 侧边栏
     sidebar: {
       '/posts/': [
         {
-          text: '所有文章',
+          text: '📚 文章归档',
+          collapsed: false,
           items: [
-            { text: '文章列表', link: '/posts/' },
+            { text: '所有文章', link: '/posts/' },
+          ],
+        },
+        {
+          text: '🏷️ 标签',
+          collapsed: true,
+          items: [
+            { text: '浏览标签', link: '/tags' },
+          ],
+        },
+        {
+          text: '🔗 快速导航',
+          collapsed: true,
+          items: [
+            { text: '关于', link: '/about' },
+            { text: 'GitHub', link: 'https://github.com/rongzhenl' },
           ],
         },
       ],
@@ -51,12 +76,19 @@ export default defineConfig({
     // 社交链接
     socialLinks: [
       { icon: 'github', link: 'https://github.com/rongzhenl' },
+      {
+        icon: {
+          svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>',
+        },
+        link: '/feed.xml',
+        ariaLabel: 'RSS 订阅',
+      },
     ],
 
     // 页脚
     footer: {
-      message: '用 VitePress 构建',
-      copyright: `Copyright © ${new Date().getFullYear()}`,
+      message: '用 VitePress 构建 · <a href="/vitePressBlog/feed.xml">RSS 订阅</a>',
+      copyright: `Copyright © ${new Date().getFullYear()} · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">CC BY-NC-SA 4.0</a>`,
     },
 
     // 全文搜索（内置，无需额外配置）
@@ -85,7 +117,7 @@ export default defineConfig({
       },
     },
 
-    // 文章页配置
+    // 文章页右侧目录（展示 h2 + h3）
     outline: {
       label: '本文目录',
       level: [2, 3],
@@ -106,7 +138,7 @@ export default defineConfig({
       },
     },
 
-    // 编辑链接（改为你的 GitHub 仓库地址）
+    // 编辑链接
     editLink: {
       pattern: 'https://github.com/rongzhenl/vitePressBlog/edit/main/docs/:path',
       text: '在 GitHub 上编辑此页',
@@ -125,6 +157,10 @@ export default defineConfig({
     theme: {
       light: 'github-light',
       dark: 'github-dark',
+    },
+    // 数学公式支持
+    config: (md) => {
+      md.use(mathjax3)
     },
   },
 

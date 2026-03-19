@@ -212,6 +212,66 @@
   background: var(--vp-c-text-3);
 }
 
+/* ── 侧边栏增强 ──────────────────────────────────────────── */
+
+/* 侧边栏分组标题 */
+.VPSidebarItem.level-0 > .item > .text {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--vp-c-text-2);
+}
+
+/* 侧边栏折叠动画 */
+.VPSidebarItem .caret {
+  transition: transform 0.2s ease;
+}
+
+/* ── 数学公式 ────────────────────────────────────────────── */
+
+.vp-doc mjx-container {
+  overflow-x: auto;
+  padding: 0.5em 0;
+}
+
+.vp-doc mjx-container[display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+/* ── diff 代码块 ─────────────────────────────────────────── */
+
+.vp-doc .line.diff.add {
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.vp-doc .line.diff.remove {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.vp-doc .line.diff.add::before {
+  content: '+';
+  color: #10b981;
+  position: absolute;
+  left: 0.5rem;
+}
+
+.vp-doc .line.diff.remove::before {
+  content: '-';
+  color: #ef4444;
+  position: absolute;
+  left: 0.5rem;
+}
+
+/* ── 文章信息栏 ──────────────────────────────────────────── */
+
+/* 隐藏首页/标签页/关于页的文章信息栏 */
+.VPHome .post-info,
+.VPPage .post-info {
+  display: none;
+}
+
 /* ── 响应式 ─────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
