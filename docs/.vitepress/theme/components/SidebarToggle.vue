@@ -2,16 +2,26 @@
 import { ref, onMounted } from 'vue'
 
 const collapsed = ref(false)
+const hasSidebar = ref(false)
 
 const STORAGE_KEY = 'vp-sidebar-collapsed'
 
 onMounted(() => {
+  // 检测当前页面是否有侧边栏
+  hasSidebar.value = !!document.querySelector('.VPSidebar')
+
   // 恢复上次状态
   const saved = localStorage.getItem(STORAGE_KEY)
   if (saved === 'true') {
     collapsed.value = true
     document.documentElement.classList.add('sidebar-collapsed')
   }
+
+  // 路由切换时重新检测侧边栏
+  const observer = new MutationObserver(() => {
+    hasSidebar.value = !!document.querySelector('.VPSidebar')
+  })
+  observer.observe(document.body, { childList: true, subtree: true })
 })
 
 function toggle() {
@@ -28,6 +38,7 @@ function toggle() {
 
 <template>
   <button
+    v-if="hasSidebar"
     class="sidebar-toggle-btn"
     :title="collapsed ? '展开侧边栏' : '收起侧边栏'"
     :aria-label="collapsed ? '展开侧边栏' : '收起侧边栏'"
@@ -40,12 +51,11 @@ function toggle() {
 <style scoped>
 .sidebar-toggle-btn {
   position: fixed;
-  /* 垂直居中于侧边栏 */
   top: 50%;
   transform: translateY(-50%);
-  /* 紧贴侧边栏右边缘 */
-  left: var(--vp-sidebar-width, 272px);
-  z-index: 100;
+  /* 紧贴侧边栏右边缘，VitePress 侧边栏宽度为 272px */
+  left: 272px;
+  z-index: 99;
   width: 20px;
   height: 48px;
   background: var(--vp-c-bg-soft);
@@ -58,35 +68,31 @@ function toggle() {
   justify-content: center;
   transition: left 0.3s ease, background 0.15s;
   padding: 0;
-  box-shadow: 2px 0 6px rgba(0,0,0,0.06);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
 }
 
 .sidebar-toggle-btn:hover {
   background: var(--vp-c-brand-soft);
 }
 
-/* 收起状态时按钮移到左边缘 */
+/* 收起状态：按钮移到最左边 */
 :global(.sidebar-collapsed) .sidebar-toggle-btn {
   left: 0;
 }
 
 .toggle-icon {
   font-size: 18px;
-  font-weight: 300;
   color: var(--vp-c-text-2);
   line-height: 1;
   display: inline-block;
   transition: transform 0.3s ease;
-  /* 默认朝左（收起方向） */
-  transform: rotate(0deg);
 }
 
 .toggle-icon.collapsed {
-  /* 收起后朝右（展开方向） */
   transform: rotate(180deg);
 }
 
-/* 只在有侧边栏的宽度下显示 */
+/* 只在桌面端（有侧边栏）显示 */
 @media (max-width: 959px) {
   .sidebar-toggle-btn {
     display: none;

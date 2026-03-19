@@ -26,10 +26,8 @@ export default {
       'doc-before': () => h(PostInfo),
       // 文章底部：评论
       'doc-after': () => h(GiscusComment),
-      // 全局：回到顶部 + 图片 Lightbox
-      'layout-bottom': () => [h(BackToTop), h(ImageLightbox)],
-      // 侧边栏收起按钮
-      'sidebar-nav-after': () => h(SidebarToggle),
+      // 全局：回到顶部 + 图片 Lightbox + 侧边栏收起按钮
+      'layout-bottom': () => [h(BackToTop), h(ImageLightbox), h(SidebarToggle)],
     })
   },
 
