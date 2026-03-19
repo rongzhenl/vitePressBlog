@@ -29,158 +29,51 @@ features:
 ---
 
 <script setup>
-import { computed } from 'vue'
 import PostList from './.vitepress/theme/components/PostList.vue'
-import { usePostData } from './.vitepress/theme/composables/usePostData'
-
-const { posts, tagMap } = usePostData()
-
-const totalPosts = computed(() => posts.value.length)
-const totalTags = computed(() => Object.keys(tagMap.value).length)
-const latestDate = computed(() => {
-  if (!posts.value.length) return ''
-  const d = new Date(posts.value[0].date)
-  return d.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })
-})
 </script>
 
-<!-- 统计卡片 -->
-<div class="home-stats">
-  <div class="stat-card">
-    <div class="stat-number">{{ totalPosts }}</div>
-    <div class="stat-label">篇文章</div>
-  </div>
-  <div class="stat-divider"></div>
-  <div class="stat-card">
-    <div class="stat-number">{{ totalTags }}</div>
-    <div class="stat-label">个标签</div>
-  </div>
-  <div class="stat-divider"></div>
-  <div class="stat-card">
-    <div class="stat-number stat-date">{{ latestDate || '—' }}</div>
-    <div class="stat-label">最近更新</div>
-  </div>
-</div>
-
-<!-- 最近文章 -->
 <div class="home-posts">
 
-<div class="home-section-header">
-  <h2>最近更新</h2>
-  <a href="./posts/" class="home-view-all">查看全部 →</a>
-</div>
+## 最近更新
 
 <PostList :limit="5" />
 
+<div class="home-posts-more">
+  <a href="./posts/">查看全部文章 →</a>
 </div>
 
-<style>
-/* ── 统计卡片 ─────────────────────────────────────────────── */
-.home-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  max-width: 480px;
-  margin: -1rem auto 0;
-  padding: 1.25rem 2rem;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-}
+</div>
 
-.dark .home-stats {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-}
-
-.stat-card {
-  flex: 1;
-  text-align: center;
-  padding: 0 1rem;
-}
-
-.stat-number {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--vp-c-brand-1);
-  line-height: 1.2;
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-number.stat-date {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-}
-
-.stat-label {
-  font-size: 12px;
-  color: var(--vp-c-text-3);
-  margin-top: 2px;
-  font-weight: 500;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 36px;
-  background: var(--vp-c-divider);
-  flex-shrink: 0;
-}
-
-/* ── 最近文章区域 ─────────────────────────────────────────── */
+<style scoped>
 .home-posts {
   max-width: 768px;
-  margin: 2.5rem auto 0;
-  padding: 0 1.5rem 4rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
 }
 
-.home-section-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-}
-
-.home-section-header h2 {
-  font-size: 1.3rem;
+.home-posts h2 {
+  font-size: 1.4rem;
   font-weight: 700;
+  margin-bottom: 1.5rem;
   color: var(--vp-c-text-1);
-  margin: 0;
   border: none;
   padding: 0;
 }
 
-.home-view-all {
-  font-size: 13px;
-  font-weight: 500;
+.home-posts-more {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.home-posts-more a {
   color: var(--vp-c-brand-1);
+  font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
-  opacity: 0.85;
-  transition: opacity 0.15s;
-}
-.home-view-all:hover {
-  opacity: 1;
+  transition: color 0.2s;
 }
 
-/* ── 响应式 ─────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .home-stats {
-    max-width: calc(100% - 2rem);
-    margin: -0.5rem 1rem 0;
-    padding: 1rem 0.5rem;
-  }
-
-  .stat-number {
-    font-size: 1.4rem;
-  }
-
-  .stat-number.stat-date {
-    font-size: 0.75rem;
-  }
-
-  .home-posts {
-    padding: 0 1rem 3rem;
-  }
+.home-posts-more a:hover {
+  color: var(--vp-c-brand-2);
 }
 </style>

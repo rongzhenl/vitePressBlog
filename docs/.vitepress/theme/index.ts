@@ -9,7 +9,6 @@ import PostList from './components/PostList.vue'
 import PostInfo from './components/PostInfo.vue'
 import BackToTop from './components/BackToTop.vue'
 import ImageLightbox from './components/ImageLightbox.vue'
-import ArchiveSidebar from './components/ArchiveSidebar.vue'
 
 import './styles/custom.css'
 import './styles/vars.css'
@@ -27,8 +26,6 @@ export default {
       'doc-after': () => h(GiscusComment),
       // 全局：回到顶部 + 图片 Lightbox
       'layout-bottom': () => [h(BackToTop), h(ImageLightbox)],
-      // 侧边栏顶部：动态归档 + 标签
-      'sidebar-nav-before': () => h(ArchiveSidebar),
     })
   },
 
