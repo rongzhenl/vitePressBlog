@@ -45,32 +45,9 @@ export default defineConfig({
       },
     ],
 
-    // 侧边栏
+    // 侧边栏：保留空配置以渲染侧边栏容器（动态内容由 ArchiveSidebar 组件注入）
     sidebar: {
-      '/posts/': [
-        {
-          text: '📚 文章归档',
-          collapsed: false,
-          items: [
-            { text: '所有文章', link: '/posts/' },
-          ],
-        },
-        {
-          text: '🏷️ 标签',
-          collapsed: true,
-          items: [
-            { text: '浏览标签', link: '/tags' },
-          ],
-        },
-        {
-          text: '🔗 快速导航',
-          collapsed: true,
-          items: [
-            { text: '关于', link: '/about' },
-            { text: 'GitHub', link: 'https://github.com/rongzhenl' },
-          ],
-        },
-      ],
+      '/posts/': [],
     },
 
     // 社交链接
