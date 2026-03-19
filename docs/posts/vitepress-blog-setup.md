@@ -318,17 +318,50 @@ jobs:
 
 部署完成后访问地址：`https://你的用户名.github.io/仓库名/`
 
+## 本地预览
+
+写文章时不需要每次都推送到 GitHub 才能看效果，本地启动开发服务器即可实时预览。
+
+```bash
+npm run dev
+```
+
+启动成功后终端会输出：
+
+```
+  vitepress v1.6.4
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+```
+
+打开浏览器访问 `http://localhost:5173/`（如果配置了 `base`，访问 `http://localhost:5173/` 即可，开发模式下 base 不生效）。
+
+开发服务器支持**热更新**：保存 `.md` 文件后，浏览器页面会自动刷新，无需手动操作。新增文章文件也会被自动检测到，刷新页面即可看到。
+
+如果想在推送前验证构建产物是否正常（比如检查死链、RSS 生成等），可以先构建再预览：
+
+```bash
+npm run build    # 构建到 docs/.vitepress/dist/
+npm run preview  # 在 http://localhost:4173/ 预览构建产物
+```
+
+::: tip 开发 vs 构建的区别
+`npm run dev` 是开发模式，速度快，但不会检查死链；`npm run build` 是生产构建，会严格检查所有内部链接，推送前最好跑一次确认没有报错。
+:::
+
 ## 日常维护
 
 新写一篇文章只需三步：
 
 ```bash
 # 1. 在 docs/posts/ 下新建 .md 文件，写内容
-# 2. 提交
+# 2. 本地预览确认效果
+npm run dev   # 访问 http://localhost:5173/
+
+# 3. 提交并推送，GitHub Actions 自动部署
 git add docs/posts/new-article.md
 git commit -m "post: 文章标题"
-
-# 3. 推送，GitHub Actions 自动部署
 git push
 ```
 
