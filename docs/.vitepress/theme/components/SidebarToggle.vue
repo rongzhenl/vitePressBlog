@@ -39,6 +39,7 @@ function toggle() {
 <template>
   <button
     v-if="hasSidebar"
+    id="sidebar-toggle-btn"
     class="sidebar-toggle-btn"
     :title="collapsed ? '展开侧边栏' : '收起侧边栏'"
     :aria-label="collapsed ? '展开侧边栏' : '收起侧边栏'"
@@ -75,13 +76,7 @@ function toggle() {
   background: var(--vp-c-brand-soft);
 }
 
-/* 收起状态：按钮移到最左边 */
-:global(.sidebar-collapsed) .sidebar-toggle-btn {
-  left: 0;
-  border-left: none;
-  border-right: 2px solid var(--vp-c-brand-1);
-  border-radius: 0 8px 8px 0;
-}
+/* 收起状态样式已移至 custom.css 全局样式，避免 scoped 选择器失效 */
 
 .toggle-icon {
   font-size: 14px;

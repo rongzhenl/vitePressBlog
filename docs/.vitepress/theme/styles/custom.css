@@ -257,6 +257,14 @@
   display: none !important;
 }
 
+/* 收起状态：按钮移到最左边（用 id 选择器，不受 scoped 影响） */
+.sidebar-collapsed #sidebar-toggle-btn {
+  left: 0 !important;
+  border-left: none !important;
+  border-right: 2px solid var(--vp-c-brand-1) !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
 /* ── 数学公式 ────────────────────────────────────────────── */
 
 .vp-doc mjx-container {
