@@ -53,36 +53,40 @@ function toggle() {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  /* 紧贴侧边栏右边缘，VitePress 侧边栏宽度为 272px */
   left: 272px;
   z-index: 99;
-  width: 20px;
-  height: 48px;
-  background: var(--vp-c-bg-soft);
+  width: 16px;
+  height: 56px;
+  background: var(--vp-c-bg-alt);
   border: 1px solid var(--vp-c-divider);
-  border-left: none;
-  border-radius: 0 6px 6px 0;
+  border-left: 2px solid var(--vp-c-brand-1);
+  border-radius: 0 8px 8px 0;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: left 0.3s ease, background 0.15s;
+  transition: left 0.3s ease, background 0.15s, width 0.15s;
   padding: 0;
-  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-toggle-btn:hover {
+  width: 22px;
   background: var(--vp-c-brand-soft);
 }
 
 /* 收起状态：按钮移到最左边 */
 :global(.sidebar-collapsed) .sidebar-toggle-btn {
   left: 0;
+  border-left: none;
+  border-right: 2px solid var(--vp-c-brand-1);
+  border-radius: 0 8px 8px 0;
 }
 
 .toggle-icon {
-  font-size: 18px;
-  color: var(--vp-c-text-2);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
   line-height: 1;
   display: inline-block;
   transition: transform 0.3s ease;
