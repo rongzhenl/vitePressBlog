@@ -267,6 +267,23 @@
   padding-left: 0 !important;
 }
 
+/* 收起状态：导航栏 title 浮层取消 absolute，回到正常流，避免叠在内容上 */
+.sidebar-collapsed .VPNavBar.has-sidebar .title {
+  position: relative !important;
+  width: auto !important;
+  padding-left: 32px !important;
+}
+
+/* 收起状态：导航栏 content 区域左边距清零 */
+.sidebar-collapsed .VPNavBar.has-sidebar .content {
+  padding-left: 0 !important;
+}
+
+/* 收起状态：导航栏分割线左边距清零 */
+.sidebar-collapsed .VPNavBar.has-sidebar .divider {
+  padding-left: 0 !important;
+}
+
 /* 收起状态：按钮移到最左边（用 id 选择器，不受 scoped 影响） */
 .sidebar-collapsed #sidebar-toggle-btn {
   left: 0 !important;
