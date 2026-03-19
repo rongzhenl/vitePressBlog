@@ -240,14 +240,19 @@
   min-width: 0 !important;
   overflow: hidden !important;
   opacity: 0 !important;
-  transform: translateX(-100%) !important;
+  transform: translateX(-272px) !important;
+  /* 用 visibility 彻底阻止内容透出 */
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
-/* 收起状态：内容区占满宽度 */
+/* 收起状态：内容区左移占满侧边栏空间 */
 .sidebar-collapsed .VPContent {
   padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
+/* 收起状态：让 VPLayout 整体左移 */
 .sidebar-collapsed .VPDoc .container {
   max-width: 100% !important;
 }
@@ -255,6 +260,11 @@
 /* 收起状态：隐藏侧边栏遮罩 */
 .sidebar-collapsed .VPBackdrop {
   display: none !important;
+}
+
+/* 收起状态：本文目录栏左边距清零（原本留有侧边栏宽度的 padding） */
+.sidebar-collapsed .VPLocalNav.has-sidebar {
+  padding-left: 0 !important;
 }
 
 /* 收起状态：按钮移到最左边（用 id 选择器，不受 scoped 影响） */
