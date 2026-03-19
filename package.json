@@ -1,0 +1,15 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "个人技术博客",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "feed": "^5.2.0",
+    "vitepress": "latest"
+  }
+}
