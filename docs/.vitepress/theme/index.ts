@@ -9,7 +9,6 @@ import PostList from './components/PostList.vue'
 import PostInfo from './components/PostInfo.vue'
 import BackToTop from './components/BackToTop.vue'
 import ImageLightbox from './components/ImageLightbox.vue'
-import PostsAside from './components/PostsAside.vue'
 
 import './styles/custom.css'
 import './styles/vars.css'
@@ -27,8 +26,6 @@ export default {
       'doc-after': () => h(GiscusComment),
       // 全局：回到顶部 + 图片 Lightbox
       'layout-bottom': () => [h(BackToTop), h(ImageLightbox)],
-      // 文章列表页右侧：标签过滤 + 归档统计（组件内部判断路径）
-      'aside-outline-before': () => h(PostsAside),
     })
   },
 
