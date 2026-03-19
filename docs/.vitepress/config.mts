@@ -8,8 +8,8 @@ export default defineConfig({
   description: '记录技术探索，分享开发经验',
   lang: 'zh-CN',
 
-  // 部署到 GitHub Pages 时改为 /repo-name/，Vercel 保持 /
-  base: '/',
+  // GitHub Pages 部署，仓库名作为子路径
+  base: '/vitePressBlog/',
 
   // ── 构建配置 ──────────────────────────────────────────────
   cleanUrls: true,
@@ -50,7 +50,7 @@ export default defineConfig({
 
     // 社交链接
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-username' },
+      { icon: 'github', link: 'https://github.com/rongzhenl' },
     ],
 
     // 页脚
@@ -108,7 +108,7 @@ export default defineConfig({
 
     // 编辑链接（改为你的 GitHub 仓库地址）
     editLink: {
-      pattern: 'https://github.com/your-username/blog/edit/main/docs/:path',
+      pattern: 'https://github.com/rongzhenl/vitePressBlog/edit/main/docs/:path',
       text: '在 GitHub 上编辑此页',
     },
   },

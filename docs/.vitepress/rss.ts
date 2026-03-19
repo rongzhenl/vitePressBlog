@@ -8,7 +8,7 @@ import { Feed } from 'feed'
 import type { SiteConfig } from 'vitepress'
 
 // 站点信息（与 config.mts 保持一致）
-const SITE_URL = 'https://your-blog.vercel.app'  // ← 改为你的域名
+const SITE_URL = 'https://rongzhenl.github.io/vitePressBlog'
 const SITE_TITLE = '技术笔记'
 const SITE_DESCRIPTION = '记录技术探索，分享开发经验'
 const AUTHOR = {
