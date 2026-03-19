@@ -50,7 +50,7 @@ export default defineConfig({
       '/posts/': [
         {
           text: '📚 文章归档',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '所有文章', link: '/posts/' },
           ],

@@ -9,6 +9,7 @@ import PostList from './components/PostList.vue'
 import PostInfo from './components/PostInfo.vue'
 import BackToTop from './components/BackToTop.vue'
 import ImageLightbox from './components/ImageLightbox.vue'
+import PostsPage from './components/PostsPage.vue'
 
 import './styles/custom.css'
 import './styles/vars.css'
@@ -32,5 +33,6 @@ export default {
   enhanceApp({ app }) {
     app.component('TagList', TagList)
     app.component('PostList', PostList)
+    app.component('PostsPage', PostsPage)
   },
 } satisfies Theme
