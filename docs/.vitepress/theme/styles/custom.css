@@ -227,6 +227,36 @@
   transition: transform 0.2s ease;
 }
 
+/* ── 侧边栏整体收起 ──────────────────────────────────────── */
+
+/* 侧边栏本体：加过渡动画 */
+.VPSidebar {
+  transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* 收起状态：隐藏侧边栏 */
+.sidebar-collapsed .VPSidebar {
+  width: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  transform: translateX(-100%) !important;
+}
+
+/* 收起状态：内容区占满宽度 */
+.sidebar-collapsed .VPContent {
+  padding-left: 0 !important;
+}
+
+.sidebar-collapsed .VPDoc .container {
+  max-width: 100% !important;
+}
+
+/* 收起状态：隐藏侧边栏遮罩 */
+.sidebar-collapsed .VPBackdrop {
+  display: none !important;
+}
+
 /* ── 数学公式 ────────────────────────────────────────────── */
 
 .vp-doc mjx-container {

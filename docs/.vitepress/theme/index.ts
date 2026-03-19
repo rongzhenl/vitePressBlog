@@ -10,6 +10,7 @@ import PostInfo from './components/PostInfo.vue'
 import BackToTop from './components/BackToTop.vue'
 import ImageLightbox from './components/ImageLightbox.vue'
 import PostsPage from './components/PostsPage.vue'
+import SidebarToggle from './components/SidebarToggle.vue'
 
 import './styles/custom.css'
 import './styles/vars.css'
@@ -27,6 +28,8 @@ export default {
       'doc-after': () => h(GiscusComment),
       // 全局：回到顶部 + 图片 Lightbox
       'layout-bottom': () => [h(BackToTop), h(ImageLightbox)],
+      // 侧边栏收起按钮
+      'sidebar-nav-after': () => h(SidebarToggle),
     })
   },
 
