@@ -45,29 +45,15 @@ export default defineConfig({
       },
     ],
 
-    // 侧边栏
+    // 侧边栏：扁平链接，无分组
     sidebar: {
       '/posts/': [
         {
-          text: '📚 文章归档',
-          collapsed: true,
           items: [
-            { text: '所有文章', link: '/posts/' },
-          ],
-        },
-        {
-          text: '🏷️ 标签',
-          collapsed: true,
-          items: [
-            { text: '浏览标签', link: '/tags' },
-          ],
-        },
-        {
-          text: '🔗 快速导航',
-          collapsed: true,
-          items: [
-            { text: '关于', link: '/about' },
-            { text: 'GitHub', link: 'https://github.com/rongzhenl' },
+            { text: '📚 所有文章', link: '/posts/' },
+            { text: '🏷️ 浏览标签', link: '/tags' },
+            { text: '👤 关于', link: '/about' },
+            { text: '🐙 GitHub', link: 'https://github.com/rongzhenl' },
           ],
         },
       ],
