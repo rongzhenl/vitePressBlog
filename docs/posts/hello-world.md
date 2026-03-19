@@ -43,7 +43,7 @@ description: 文章摘要，显示在列表页
 
 ## 部署
 
-推送到 GitHub，Vercel 自动构建部署，全程不需要手动操作。
+推送到 GitHub，GitHub Actions 自动构建并部署到 GitHub Pages，全程不需要手动操作。详细搭建过程记录在 [这篇文章](/vitePressBlog/posts/vitepress-blog-setup) 里。
 
 ---
 
