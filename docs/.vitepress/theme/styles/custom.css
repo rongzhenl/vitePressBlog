@@ -267,16 +267,16 @@
   padding-left: 0 !important;
 }
 
-/* 收起状态：导航栏 title 浮层取消 absolute，回到正常流，避免叠在内容上 */
+/* 收起状态：给导航栏 title 浮层加不透明背景，防止文章内容从透明区域透出 */
 .sidebar-collapsed .VPNavBar.has-sidebar .title {
-  position: relative !important;
-  width: auto !important;
-  padding-left: 32px !important;
+  background-color: var(--vp-c-bg) !important;
+  backdrop-filter: saturate(50%) blur(8px) !important;
+  -webkit-backdrop-filter: saturate(50%) blur(8px) !important;
 }
 
-/* 收起状态：导航栏 content 区域左边距清零 */
+/* 收起状态：导航栏 content 区域左边距清零（原本为侧边栏宽度留位） */
 .sidebar-collapsed .VPNavBar.has-sidebar .content {
-  padding-left: 0 !important;
+  padding-left: 16px !important;
 }
 
 /* 收起状态：导航栏分割线左边距清零 */
