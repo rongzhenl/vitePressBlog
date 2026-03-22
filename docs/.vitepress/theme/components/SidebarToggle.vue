@@ -3,8 +3,17 @@ import { ref, onMounted } from 'vue'
 
 const collapsed = ref(false)
 const hasSidebar = ref(false)
+// 动态记录侧边栏实际宽度，用于定位按钮
+const sidebarWidth = ref(0)
 
 const STORAGE_KEY = 'vp-sidebar-collapsed'
+
+function updateSidebarWidth() {
+  const sidebar = document.querySelector('.VPSidebar') as HTMLElement | null
+  if (sidebar) {
+    sidebarWidth.value = sidebar.getBoundingClientRect().width
+  }
+}
 
 function checkSidebar() {
   const sidebar = document.querySelector('.VPSidebar')
@@ -12,10 +21,11 @@ function checkSidebar() {
     hasSidebar.value = false
     return
   }
-  // 只有侧边栏实际占据宽度时才认为"有侧边栏"
-  // VitePress 在无侧边栏页面不会渲染 .VPSidebar，但以防万一也检查宽度
   const rect = sidebar.getBoundingClientRect()
   hasSidebar.value = rect.width > 0
+  if (hasSidebar.value) {
+    sidebarWidth.value = rect.width
+  }
 }
 
 onMounted(() => {
@@ -28,13 +38,16 @@ onMounted(() => {
     document.documentElement.classList.add('sidebar-collapsed')
   }
 
+  // 窗口 resize 时重新计算侧边栏宽度
+  window.addEventListener('resize', updateSidebarWidth)
+
   // 路由切换时重新检测侧边栏，并同步折叠状态
   const observer = new MutationObserver(() => {
     const prevHas = hasSidebar.value
     checkSidebar()
 
-    // 切换到无侧边栏页面时，移除 collapsed class，避免影响布局
     if (!hasSidebar.value) {
+      // 切换到无侧边栏页面，移除 collapsed class
       document.documentElement.classList.remove('sidebar-collapsed')
     } else if (!prevHas && hasSidebar.value) {
       // 切换回有侧边栏页面，恢复持久化状态
@@ -68,6 +81,7 @@ function toggle() {
     v-if="hasSidebar"
     id="sidebar-toggle-btn"
     class="sidebar-toggle-btn"
+    :style="{ left: collapsed ? '0px' : sidebarWidth + 'px' }"
     :title="collapsed ? '展开侧边栏' : '收起侧边栏'"
     :aria-label="collapsed ? '展开侧边栏' : '收起侧边栏'"
     @click="toggle"
@@ -81,7 +95,7 @@ function toggle() {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  left: 272px;
+  /* left 由 :style 动态绑定，不再硬编码 */
   z-index: 99;
   width: 16px;
   height: 56px;
@@ -102,8 +116,6 @@ function toggle() {
   width: 22px;
   background: var(--vp-c-brand-soft);
 }
-
-/* 收起状态样式已移至 custom.css 全局样式，避免 scoped 选择器失效 */
 
 .toggle-icon {
   font-size: 14px;
