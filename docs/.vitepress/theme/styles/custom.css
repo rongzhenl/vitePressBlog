@@ -214,6 +214,16 @@
 
 /* ── 侧边栏增强 ──────────────────────────────────────────── */
 
+/* 超宽屏下消除侧边栏左侧多余留白
+   VitePress 默认在 ≥1440px 时给侧边栏加 padding-left 使布局居中，
+   但这会导致侧边栏左边出现大片空白，覆盖为固定 32px 即可 */
+@media (min-width: 1440px) {
+  .VPSidebar {
+    padding-left: 32px !important;
+    width: var(--vp-sidebar-width) !important;
+  }
+}
+
 /* 侧边栏分组标题 */
 .VPSidebarItem.level-0 > .item > .text {
   font-size: 13px;
