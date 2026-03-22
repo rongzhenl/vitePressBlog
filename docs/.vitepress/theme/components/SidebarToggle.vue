@@ -6,20 +6,47 @@ const hasSidebar = ref(false)
 
 const STORAGE_KEY = 'vp-sidebar-collapsed'
 
-onMounted(() => {
-  // 检测当前页面是否有侧边栏
-  hasSidebar.value = !!document.querySelector('.VPSidebar')
+function checkSidebar() {
+  const sidebar = document.querySelector('.VPSidebar')
+  if (!sidebar) {
+    hasSidebar.value = false
+    return
+  }
+  // 只有侧边栏实际占据宽度时才认为"有侧边栏"
+  // VitePress 在无侧边栏页面不会渲染 .VPSidebar，但以防万一也检查宽度
+  const rect = sidebar.getBoundingClientRect()
+  hasSidebar.value = rect.width > 0
+}
 
-  // 恢复上次状态
+onMounted(() => {
+  checkSidebar()
+
+  // 恢复上次折叠状态（仅在有侧边栏的页面生效）
   const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved === 'true') {
+  if (saved === 'true' && hasSidebar.value) {
     collapsed.value = true
     document.documentElement.classList.add('sidebar-collapsed')
   }
 
-  // 路由切换时重新检测侧边栏
+  // 路由切换时重新检测侧边栏，并同步折叠状态
   const observer = new MutationObserver(() => {
-    hasSidebar.value = !!document.querySelector('.VPSidebar')
+    const prevHas = hasSidebar.value
+    checkSidebar()
+
+    // 切换到无侧边栏页面时，移除 collapsed class，避免影响布局
+    if (!hasSidebar.value) {
+      document.documentElement.classList.remove('sidebar-collapsed')
+    } else if (!prevHas && hasSidebar.value) {
+      // 切换回有侧边栏页面，恢复持久化状态
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved === 'true') {
+        collapsed.value = true
+        document.documentElement.classList.add('sidebar-collapsed')
+      } else {
+        collapsed.value = false
+        document.documentElement.classList.remove('sidebar-collapsed')
+      }
+    }
   })
   observer.observe(document.body, { childList: true, subtree: true })
 })
